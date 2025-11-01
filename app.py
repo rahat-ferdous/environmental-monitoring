@@ -103,11 +103,11 @@ def generate_environmental_data():
     
     air_df = pd.DataFrame(air_data)
     
-    # Water Quality Data
+    # Water Quality Data - Weekly data
     water_bodies = ['River North', 'Lake Central', 'Canal Industrial', 'Reservoir South']
     water_data = []
     
-    for date in dates[::7]:  Weekly data
+    for date in dates[::7]:  # Weekly data
         for water_body in water_bodies:
             if 'Industrial' in water_body:
                 base_ph = 6.2
@@ -131,17 +131,14 @@ def generate_environmental_data():
     
     water_df = pd.DataFrame(water_data)
     
-    # Biodiversity Data
+    # Biodiversity Data - Monthly data
     species_data = []
     species_list = ['Mangrove Trees', 'Fish Species', 'Bird Species', 'Mammal Species', 'Insect Species']
     
-    for date in dates[::30]:  Monthly data
+    for date in dates[::30]:  # Monthly data
         for species in species_list:
             trend = 1 + 0.1 * (date.month - 6) / 6  # Seasonal trend
-            if 'Industrial' in station:
-                base_count = 50
-            else:
-                base_count = 120
+            base_count = 50 if 'Industrial' in station else 120
             
             species_data.append({
                 'Date': date,
